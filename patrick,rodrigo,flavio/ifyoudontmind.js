@@ -23,15 +23,15 @@
 // var hour = 5;
 // var min = 37;
 // var period = "PM";
-
-var str = "It's ";
-
 function time(hour, min, period) {
+    var str = "It's ";
     var period = period.toUpperCase();
     if (min === 15) {
         str = str + "a quarter after " + hour;
     } else if (min === 30) {
         str = str + "a half past " + hour;
+    } else if (min === 45 && hour == 12) {
+        str = str + "a quarter till " + (hour - 11);
     } else if (min === 45) {
         str = str + "a quarter till " + (hour + 1);
     } else if (min < 60) {
@@ -49,11 +49,14 @@ function time(hour, min, period) {
         str = str + " in the afternoon";
     } else if (period == "PM" && hour > 5 && hour <= 8) {
         str = str + " in the evening";
-    } else if (period == "PM" && hour == 12) {ß
+    } else if (period == "PM" && hour == 12 && min == 0) {
         str = str + " noon";
+    } else if (period == "PM" && hour == 12 && min > 0){
+        str = str + " in the afternoon";
     } else {
         str = str + " at night";
     }
     console.log(str);
+    return str;
 }
-time(11, 59, "pm")
+time(12, 45, "pm")
